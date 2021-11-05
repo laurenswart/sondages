@@ -144,20 +144,7 @@ class Database {
 	 * @return boolean|string True si le mot de passe a été modifié, un message d'erreur sinon.
 	 */
 	public function updateUser($nickname, $password) {
-		if (strlen($password)>10 || strlen($password)<3){
-	        return "Le mot de passe doit contenir entre 3 et 10 caract�res.";
-	    }
-	    $password = password_hash($password, PASSWORD_BCRYPT);
-	    $query =  "UPDATE users set password = ? WHERE nickname = ? ";
-	    $stmt = $this->connection->prepare($query);
-	    $stmt->bindParam(1, $password, PDO::PARAM_STR);
-	    $stmt->bindParam(2, $nickname, PDO::PARAM_STR);
-	    
-	    $result = $stmt->execute();
-	    
-	    if (!$result || $stmt->rowCount() != 1 ){
-	        return "Erreur dans la base de donn�es";
-	    }
+		/* TODO  */
 		return true;
 	}
 
@@ -201,14 +188,7 @@ class Database {
 	 * @return array(Survey)|boolean Sondages trouvés par la fonction ou false si une erreur s'est produite.
 	 */
 	public function loadSurveysByKeyword($keyword) {
-	    
-	    $keyword = $this->connection->quote(strtolower($keyword));
-		$query =  "SELECT * FROM surveys WHERE INSTR(lower(question), $keyword)>0 ";
-	    $stmt = $this->connection->query($query);
-	    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-	    $stmt->closeCursor();
-	    
-	    return $this->loadSurveys($rows);
+		/* TODO  */
 	}
 
 
@@ -231,26 +211,7 @@ class Database {
 	 */
 	private function loadSurveys($arraySurveys) {
 		$surveys = array();
-		
-		if(!is_array($arraySurveys)) return false;
-		
-		foreach ($arraySurveys as $row){
-		    //create survey from data in row
-		    $survey = new Survey($row['owner'], $row['question']);
-		    $survey->setId($row['id']);
-		    //get responses for this survey and add them to survey
-		    $query =  "SELECT * FROM responses WHERE id_survey = ? ";
-		    $stmt = $this->connection->prepare($query);
-		    $stmt->bindParam(1, $row['id'], PDO::PARAM_INT);
-		    $stmt->execute();
-		    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-		    $stmt->closeCursor();
-		    
-		    $this->loadResponses($survey, $rows);
-		    //add this survey to this list of surveys
-		    $surveys[] = $survey;
-		}
-		
+		/* TODO  */
 		return $surveys;
 	}
 
@@ -262,17 +223,7 @@ class Database {
 	 * @return array(Response)|boolean Le tableau de réponses ou false si une erreur s'est produite.
 	 */
 	private function loadResponses(&$survey, $arrayResponses) {
-	    if(!is_array($arrayResponses)) return false;
-	    
-	    foreach($arrayResponses as $row){
-	        //create response from data in row
-	        $response = new Response($survey, $row['title'], $row['count']);
-	        $response->setId($row['id']);
-	        //add response to this survey
-	        $responses[] = $response;
-	        $survey->addResponse($response);
-	    }
-	    return $responses;
+		/* TODO  */
 	}
 
 }

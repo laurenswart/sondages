@@ -5,6 +5,6 @@
 <a href="<?php echo $_SERVER['PHP_SELF'].'?action=GetMySurveys' ?>">Afficher
 	mes sondages</a>
 |
-<a href="<?php echo $_SERVER['PHP_SELF'].'?action=UpdateUserForm' ?>">Changer 
+<a href="<?php echo $_SERVER['PHP_SELF'].'?action=GetMySurveys' ?>">Changer 
 	mon mot de passe</a>
 

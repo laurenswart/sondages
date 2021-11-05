@@ -20,14 +20,14 @@ function getAction() {
 			'SignUpForm',
 			'SignUp',
 			'Logout',
-			'Login',
+			'Login',/*
 			'UpdateUserForm',
-			'UpdateUser',/*
+			'UpdateUser',
 			'AddSurveyForm',
 			'AddSurvey',
-			'GetMySurveys',*/
+			'GetMySurveys',
 			'Search',
-			/*'Vote'*/);
+			'Vote'*/);
 
 	if (!in_array($action, $actions)){
 	    $action = 'Default';
